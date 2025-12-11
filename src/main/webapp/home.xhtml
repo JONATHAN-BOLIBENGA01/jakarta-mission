@@ -1,41 +1,103 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html">
-
 <h:head>
-    <title>Home</title>
-    <!-- TailwindCSS -->
+    <title>Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS for Fonts -->
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f5132', 
+                        secondary: '#0dcaf0', 
+                        accent: '#d4af37', 
+                        sand: '#fdfbf7',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </h:head>
+<h:body class="bg-sand text-gray-800 flex flex-col min-h-screen">
 
-<h:body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#{request.contextPath}/index.xhtml" class="flex items-center gap-2 text-2xl font-serif font-bold text-primary">
+                        <i class="fas fa-leaf text-emerald-600"></i>
+                        <span>Jakarta mission</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#{request.contextPath}/index.xhtml" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Accueil</a>
+                        <a href="#{request.contextPath}/index.xhtml#destinations" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Destinations</a>
+                        <a href="#{request.contextPath}/index.xhtml#culture" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Culture</a>
+                        <a href="#{request.contextPath}/index.xhtml#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <div class="bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-sm text-center border border-white/40">
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-20 pb-10 px-4">
+        <div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+            <!-- Image Side -->
+            <div class="md:w-1/2 relative min-h-[300px]">
+                <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&amp;fit=crop&amp;w=800&amp;q=80" 
+                     alt="Temple Indonésien" 
+                     class="absolute inset-0 w-full h-full object-cover"/>
+                <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+            </div>
+            
+            <!-- Content Side -->
+            <div class="md:w-1/2 p-10 flex flex-col justify-center">
+                <h1 class="text-3xl font-serif font-bold text-primary mb-6">Bienvenue</h1>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Préparez-vous à explorer les merveilles de l'archipel. Que souhaitez-vous découvrir aujourd'hui ?
+                </p>
+                
+                <h:form class="space-y-4">
+                    <h:commandButton 
+                        value="À propos de nous"
+                        action="#{navigationController.voirApropos()}"
+                        styleClass="w-full py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
 
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">
-            Bienvenue
-        </h1>
+                    <h:commandButton 
+                        value="Découvrir les Lieux"
+                        action="#{navigationController.voirLieu()}"
+                        styleClass="w-full py-3 px-6 rounded-xl bg-white text-emerald-600 border-2 border-emerald-600 font-semibold shadow-sm hover:bg-emerald-50 transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
+                </h:form>
+            </div>
+        </div>
+    </main>
 
-        <h:form class="space-y-4">
-
-            <!-- Bouton A propos -->
-            <h:commandButton 
-                value="À propos"
-                action="#{navigationController.voirApropos()}"
-                styleClass="w-full py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition" />
-
-            <!-- Bouton Lieu de destination -->
-            <h:commandButton 
-                value="Lieu de destination"
-                action="#{navigationController.voirLieu()}"
-                styleClass="w-full py-2 rounded-lg bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition" />
-
-        </h:form>
-
-    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">2025 Merveilleuse Indonésie. Tous droits réservés.</p>
+        </div>
+    </footer>
 
 </h:body>
 </html>

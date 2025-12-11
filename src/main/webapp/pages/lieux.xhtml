@@ -2,36 +2,125 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h1>Où est-ce que vous vouliez aller ?</h1>
-        <h:form>
-            <h3>
-                Ajouter un lieu de votre choix
-            </h3>
-            <div>
-                <div>
-                    <span>Entrer le nom du lieu</span>
-                    <h:inputText value=""/>
+<h:head>
+    <title>Ajouter un Lieu - Jakarta mission</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS for Fonts -->
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f5132', 
+                        secondary: '#0dcaf0', 
+                        accent: '#d4af37', 
+                        sand: '#fdfbf7',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</h:head>
+<h:body class="bg-sand text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#{request.contextPath}/index.xhtml" class="flex items-center gap-2 text-2xl font-serif font-bold text-primary">
+                        <i class="fas fa-leaf text-emerald-600"></i>
+                        <span>Jakarta Mission</span>           </a>
                 </div>
-               
-                <div>
-                    <span>Entrer la latitude</span>
-                    <h:inputText value="" />
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#{request.contextPath}/index.xhtml" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Accueil</a>
+                        <a href="#{request.contextPath}/index.xhtml#destinations" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Destinations</a>
+                        <a href="#{request.contextPath}/index.xhtml#culture" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Culture</a>
+                        <a href="#{request.contextPath}/index.xhtml#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
                 </div>
-                
-                <div>
-                    <span>Entrer la longititude</span>
-                <h:inputText value="" />
-                </div>
-                
             </div>
-            <div>
-                 <h:inputTextarea value="" />
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-20 pb-10 px-4 relative">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&amp;fit=crop&amp;w=1920&amp;q=80" 
+                 alt="Travel Map Background" 
+                 class="w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-white/80"></div>
+        </div>
+
+        <div class="relative z-10 max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden p-8 md:p-12">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-serif font-bold text-primary mb-2">Où souhaitez-vous aller ?</h1>
+                <p class="text-gray-600">Partagez votre prochaine destination de rêve avec nous.</p>
             </div>
-            
-        </h:form>
-    </h:body>
+
+            <h:form class="space-y-6">
+                <div class="bg-sand p-6 rounded-xl border border-accent/20">
+                    <h3 class="text-xl font-serif font-bold text-gray-800 mb-6 flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt text-accent"></i>
+                        Ajouter un lieu
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nom du lieu</label>
+                            <h:inputText value="" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Latitude</label>
+                                <h:inputText value="" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Longitude</label>
+                                <h:inputText value="" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <h:inputTextarea value="" rows="4" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all resize-none"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <h:commandButton 
+                        value="Enregistrer la destination"
+                        action="#{navigationController.ajouterLieu()}"
+                        styleClass="w-full py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
+                </div>
+            </h:form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">2025 Jakarta mission. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</h:body>
 </html>
