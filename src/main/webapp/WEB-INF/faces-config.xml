@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigation-rule>
+    <from-view-id>/index.xhtml</from-view-id> 
+    <navigation-case> <!-- on definit le cas de la navigation-->
+        <from-outcome>home</from-outcome> <!-- valeur de la navigation-->
+        <to-view-id>/home.xhtml</to-view-id> 
+        <redirect/>
+    </navigation-case>
+</navigation-rule>
+

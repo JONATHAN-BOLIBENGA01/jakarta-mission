@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Apropos</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</h:head>
+
+<h:body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-500 to-red-500">
+
+    <div class="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full max-w-lg text-center border border-white/40">
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">
+            À propos
+        </h1>
+
+        <p class="text-gray-700 mb-6 leading-relaxed">
+            Bienvenue dans votre espace de découverte.  
+            Ici, vous pouvez explorer différentes destinations et vous préparer 
+            à vivre une expérience unique en Indonésie.  
+            Choisissez simplement votre lieu de destination pour continuer.
+        </p>
+
+        <h:form>
+            <h:commandButton 
+                value="Choisir votre lieu de destination"
+                action=""
+                styleClass="w-full py-2 rounded-lg bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition" />
+        </h:form>
+
+    </div>
+
+</h:body>
+</html>
+

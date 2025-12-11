@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Home</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</h:head>
+
+<h:body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500">
+
+    <div class="bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-sm text-center border border-white/40">
+
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">
+            Bienvenue
+        </h1>
+
+        <h:form class="space-y-4">
+
+            <!-- Bouton A propos -->
+            <h:commandButton 
+                value="À propos"
+                action="#{navigationController.voirApropos()}"
+                styleClass="w-full py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition" />
+
+            <!-- Bouton Lieu de destination -->
+            <h:commandButton 
+                value="Lieu de destination"
+                action="#{navigationController.voirLieu()}"
+                styleClass="w-full py-2 rounded-lg bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition" />
+
+        </h:form>
+
+    </div>
+
+</h:body>
+</html>

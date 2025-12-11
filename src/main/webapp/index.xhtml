@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Merveilleuse Indonésie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS for Fonts -->
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f5132', 
+                        secondary: '#0dcaf0', // Ocean Blue
+                        accent: '#d4af37', // Gold
+                        sand: '#fdfbf7',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</h:head>
+<h:body class="bg-sand text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-2 text-2xl font-serif font-bold text-primary">
+                        <i class="fas fa-leaf text-emerald-600"></i>
+                        <span>Merveilleuse Indonésie</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Accueil</a>
+                        <a href="#destinations" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Destinations</a>
+                        <a href="#culture" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Culture</a>
+                        <a href="#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Ouvrir le menu principal</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=1920&amp;q=80" 
+                 alt="Paysage Indonésien" 
+                 class="w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 border border-white/30">
+                Bienvenue au Paradis
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Explorez l'Émeraude <br/> de l'Équateur
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-100 mb-10 max-w-2xl mx-auto font-light drop-shadow-md">
+                Découvrez la beauté à couper le souffle, la culture riche et l'hospitalité chaleureuse de l'archipel indonésien.
+            </p>
+            <h:form>
+                <h:commandButton value="Commencez votre voyage" action="home" 
+                                 styleClass="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-none text-lg"/>
+            </h:form>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-24 bg-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-primary mb-4">Destinations Populaires</h2>
+                <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Des plages immaculées aux montagnes brumeuses, explorez les lieux les plus emblématiques d'Indonésie.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Bali Card -->
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             alt="Bali" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"/>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                            ÎLE
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold text-gray-900 mb-3">Bali</h3>
+                        <p class="text-gray-600 mb-6 line-clamp-3">L'Île des Dieux. Faites l'expérience de la tranquillité spirituelle, d'une culture vibrante et de spots de surf de classe mondiale dans ce paradis tropical.</p>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+                            Explorer Bali <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Borobudur Card -->
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             alt="Borobudur" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"/>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                            HÉRITAGE
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold text-gray-900 mb-3">Borobudur</h3>
+                        <p class="text-gray-600 mb-6 line-clamp-3">Le plus grand temple bouddhiste au monde. Un chef-d'œuvre d'architecture ancienne sur fond de pics volcaniques.</p>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+                            Découvrir l'Histoire <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Komodo Card -->
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             alt="Komodo" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"/>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                            NATURE
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold text-gray-900 mb-3">Île de Komodo</h3>
+                        <p class="text-gray-600 mb-6 line-clamp-3">Abritant le légendaire dragon de Komodo et des plages roses immaculées. Une aventure préhistorique vous attend.</p>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+                            Voir la Faune <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="w-full md:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-accent/20 rounded-full blur-xl"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/20 rounded-full blur-xl"></div>
+                    <img src="https://images.unsplash.com/photo-1584810359583-96fc3448c4a9?auto=format&amp;fit=crop&amp;w=800&amp;q=80" 
+                         class="relative rounded-2xl shadow-2xl w-full object-cover z-10 transform hover:scale-[1.02] transition-transform duration-500" 
+                         alt="Culture Indonésienne"/>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <span class="text-emerald-600 font-bold tracking-wider uppercase text-sm">Notre Héritage</span>
+                    <h2 class="text-4xl font-serif font-bold text-gray-900 mt-2 mb-6">Une Tapisserie de Traditions</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Des motifs complexes de Batik reconnus par l'UNESCO à la musique envoûtante du Gamelan, l'Indonésie est un creuset de cultures et de traditions diverses.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Plongez-vous dans le mode de vie local, goûtez à la cuisine épicée et savoureuse comme le Rendang et le Nasi Goreng, et soyez témoin de la chaleur authentique de l'hospitalité indonésienne qui fait que chaque visiteur se sent chez lui.
+                    </p>
+                    <button class="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+                        En Savoir Plus sur la Culture
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-2 text-2xl font-serif font-bold text-white mb-6">
+                        <i class="fas fa-leaf text-emerald-500"></i>
+                        <span>Merveilleuse Indonésie</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Le site officiel du tourisme d'Indonésie. Nous vous invitons à explorer les joyaux cachés et les monuments célèbres de notre bel archipel.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-bold mb-6 text-emerald-500">Liens Rapides</h5>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accueil</a></li>
+                        <li><a href="#destinations" class="text-gray-400 hover:text-white transition-colors">Destinations</a></li>
+                        <li><a href="#culture" class="text-gray-400 hover:text-white transition-colors">Culture</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-bold mb-6 text-emerald-500">Connectez-vous avec Nous</h5>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="mt-8">
+                        <h6 class="text-sm font-semibold text-gray-400 mb-2">Abonnez-vous à notre newsletter</h6>
+                        <div class="flex">
+                            <input type="email" placeholder="Votre email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-emerald-500 w-full"/>
+                            <button class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-r-lg transition-colors">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">2025 Merveilleuse Indonésie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+</h:body>
+</html>
