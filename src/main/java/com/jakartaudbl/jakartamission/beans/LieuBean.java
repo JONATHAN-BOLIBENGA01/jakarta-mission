@@ -24,6 +24,8 @@ public class LieuBean implements Serializable {
     private double longitude;
     private double latitude;
     private int id; // ID for editing
+    private int idASupprimer; // ID for deletion
+    private boolean showModal = false;
     private List<Lieu> lieux = new ArrayList<>();
 
     @Inject
@@ -44,6 +46,9 @@ public class LieuBean implements Serializable {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
+    public boolean isShowModal() { return showModal; }
+    public void setShowModal(boolean showModal) { this.showModal = showModal; }
+
     public List<Lieu> getLieux() { return lieuEntrepriseBean.listerTousLesLieux(); }
 
     public void ajouterLieu() {
@@ -60,6 +65,24 @@ public class LieuBean implements Serializable {
 
     public void supprimer(int id) {
         lieuEntrepriseBean.supprimerLieu(id);
+    }
+
+    public void preparerSuppression(int id) {
+        this.idASupprimer = id;
+        this.showModal = true;
+    }
+
+    public void confirmerSuppression() {
+        if (idASupprimer != 0) {
+            lieuEntrepriseBean.supprimerLieu(idASupprimer);
+            idASupprimer = 0;
+        }
+        this.showModal = false;
+    }
+
+    public void annulerSuppression() {
+        this.idASupprimer = 0;
+        this.showModal = false;
     }
 
     public void preparerModification(Lieu lieu) {
