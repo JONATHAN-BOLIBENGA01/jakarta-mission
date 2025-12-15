@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
 <h:head>
     <title>Ajouter un Lieu - Jakarta mission</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -59,15 +60,16 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center pt-20 pb-10 px-4 relative">
+    <main class="flex-grow flex flex-col items-center pt-24 pb-10 px-4 relative gap-12">
         <!-- Background Image -->
-        <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 z-0 fixed">
             <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&amp;fit=crop&amp;w=1920&amp;q=80" 
                  alt="Travel Map Background" 
                  class="w-full h-full object-cover"/>
             <div class="absolute inset-0 bg-white/80"></div>
         </div>
 
+        <!-- Form Section -->
         <div class="relative z-10 max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden p-8 md:p-12">
             <div class="text-center mb-10">
                 <h1 class="text-3xl font-serif font-bold text-primary mb-2">Où souhaitez-vous aller ?</h1>
@@ -84,34 +86,90 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Nom du lieu</label>
-                            <h:inputText value="" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                            <h:inputText value="#{lieuBean.nom}"  styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Latitude</label>
-                                <h:inputText value="" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                                <h:inputText value="#{lieuBean.latitude}" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Longitude</label>
-                                <h:inputText value="" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                                <h:inputText value="#{lieuBean.longitude}" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
                             </div>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                            <h:inputTextarea value="" rows="4" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all resize-none"/>
+                            <h:inputTextarea value="#{lieuBean.description}" rows="4" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all resize-none"/>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-4">
+                <div class="pt-4 flex gap-4">
                     <h:commandButton 
-                        value="Enregistrer la destination"
-                        action="#{navigationController.ajouterLieu()}"
-                        styleClass="w-full py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
+                        value="#{lieuBean.id == 0 ? 'Enregistrer la destination' : 'Modifier la destination'}"
+                        action="#{lieuBean.ajouterLieu()}"
+                        styleClass="flex-1 py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
+                    
+                    <h:commandButton 
+                        value="Annuler"
+                        action="#{lieuBean.viderFormulaire()}"
+                        rendered="#{lieuBean.id != 0}"
+                        styleClass="py-3 px-6 rounded-xl bg-gray-500 text-white font-semibold shadow-lg hover:bg-gray-600 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
                 </div>
             </h:form>
+        </div>
+
+        <!-- List Section -->
+        <div class="relative z-10 max-w-7xl w-full">
+            <h2 class="text-3xl font-serif font-bold text-primary text-center mb-8 drop-shadow-sm">Destinations Enregistrées</h2>
+            
+            <h:form>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <ui:repeat value="#{lieuBean.lieux}" var="lieu">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 group">
+                        <!-- Image placeholder -->
+                        <div class="h-40 bg-gray-200 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                                 alt="#{lieu.nom}" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                                <span class="text-white font-medium text-xs">
+                                    <i class="fas fa-map-pin mr-1 text-accent"></i>
+                                    #{lieu.latitude}, #{lieu.longitude}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2 font-serif truncate">#{lieu.nom}</h3>
+                            <div class="mt-2 mb-4">
+                                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Description</span>
+                                <p class="text-gray-600 text-xs leading-relaxed line-clamp-3">#{lieu.description}</p>
+                            </div>
+                            
+                            <div class="flex gap-2 pt-3 border-t border-gray-100">
+                                <h:commandButton value="Modifier" 
+                                               action="#{lieuBean.preparerModification(lieu)}"
+                                               styleClass="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 text-white text-xs font-semibold shadow hover:bg-amber-600 transition-colors cursor-pointer"/>
+                                               
+                                <h:commandButton value="Supprimer" 
+                                               action="#{lieuBean.supprimer(lieu.id)}"
+                                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lieu ?');"
+                                               styleClass="flex-1 py-1.5 px-3 rounded-lg bg-red-500 text-white text-xs font-semibold shadow hover:bg-red-600 transition-colors cursor-pointer"/>
+                            </div>
+                        </div>
+                    </div>
+                </ui:repeat>
+            </div>
+            </h:form>
+            
+            <!-- Empty State -->
+            <h:panelGroup rendered="#{empty lieuBean.lieux}" styleClass="block text-center py-12 bg-white/50 backdrop-blur-sm rounded-xl border border-dashed border-gray-300">
+                <i class="fas fa-compass text-4xl text-gray-400 mb-4"></i>
+                <p class="text-gray-500 font-medium">Aucune destination enregistrée pour le moment.</p>
+            </h:panelGroup>
         </div>
     </main>
 
