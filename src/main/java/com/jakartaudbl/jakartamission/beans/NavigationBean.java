@@ -37,4 +37,15 @@ public class NavigationBean {
            e.printStackTrace();
        }
    } 
+   
+   public void creerCompte(){
+       try{
+           String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+           FacesContext.getCurrentInstance().getExternalContext()
+                   .redirect(contextPath + "/pages/ajoute_utilisateur.xhtml");
+       }catch(IOException e){
+           
+           e.printStackTrace();
+       }
+   }
 }

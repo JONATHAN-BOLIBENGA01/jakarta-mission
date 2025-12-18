@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
 <h:head>
     <title>Jakarta mission</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -88,9 +88,19 @@
                 Découvrez la beauté à couper le souffle, la culture riche et l'hospitalité chaleureuse de l'archipel indonésien.
             </p>
             <h:form>
-                <h:commandButton value="Commencez votre voyage ici" action="home" 
+                <div class="inline-block gap-4">
+                    <h:commandButton value="Commencez votre voyage ici" action="home" 
                                  styleClass="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-none text-lg"/>
+                
+                <h:commandButton 
+                        value="creer votre compte ici"
+                        action="#{navigationController.creerCompte()}"
+                        styleClass="mr-5 bg-green-500 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-none text-lg"/>
+                </div>
             </h:form>
+            
+            
+            
         </div>
         
         <!-- Scroll Indicator -->

@@ -1,7 +1,10 @@
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/business/LieuEntrepriseBean.java
+/home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/entities/Utilisateur.java
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/entities/Lieu.java
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/beans/LieuBean.java
+/home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/business/UtilisateurEntrepriseBean.java
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/JakartaRestConfiguration.java
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/beans/NavigationBean.java
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/beans/WelcomBean.java
+/home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/beans/UtilisateurBean.java
 /home/jojo/NetBeansProjects/jakartamission/src/main/java/com/jakartaudbl/jakartamission/resources/JakartaEE10Resource.java
