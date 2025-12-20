@@ -53,6 +53,12 @@
                         <a href="#{request.contextPath}/index.xhtml#destinations" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Destinations</a>
                         <a href="#{request.contextPath}/index.xhtml#culture" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Culture</a>
                         <a href="#{request.contextPath}/index.xhtml#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                        <h:form rendered="#{utilisateurBean.loggedIn}" styleClass="inline">
+                            <span class="text-primary font-medium text-sm px-3 py-2">Bonjour, #{utilisateurBean.currentUser.username}</span>
+                            <h:commandLink action="#{utilisateurBean.seDeconnecter()}" styleClass="text-red-600 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                <i class="fas fa-sign-out-alt mr-1"></i>Déconnexion
+                            </h:commandLink>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -72,11 +78,47 @@
         <!-- Form Section -->
         <div class="relative z-10 max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden p-8 md:p-12">
             <div class="text-center mb-10">
-                <h1 class="text-3xl font-serif font-bold text-primary mb-2">Où souhaitez-vous aller ?</h1>
-                <p class="text-gray-600">Partagez votre prochaine destination de rêve avec nous.</p>
+                <h1 class="text-3xl font-serif font-bold text-primary mb-2">
+                    #{utilisateurBean.loggedIn ? 'Où souhaitez-vous aller ?' : 'Connexion requise'}
+                </h1>
+                <p class="text-gray-600">
+                    #{utilisateurBean.loggedIn ? 'Partagez votre prochaine destination de rêve avec nous.' : 'Veuillez vous connecter pour gérer les destinations.'}
+                </p>
             </div>
 
-            <h:form class="space-y-6">
+            <!-- Login Form -->
+            <h:panelGroup rendered="#{!utilisateurBean.loggedIn}">
+                <h:form id="loginForm" class="space-y-6">
+                    <div class="bg-sand p-6 rounded-xl border border-accent/20">
+                        <h3 class="text-xl font-serif font-bold text-gray-800 mb-6 flex items-center gap-2">
+                            <i class="fas fa-user-lock text-accent"></i>
+                            S'authentifier
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <h:inputText value="#{utilisateurBean.loginEmail}" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+                                <h:inputSecret value="#{utilisateurBean.loginPassword}" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 flex flex-col gap-4">
+                        <h:commandButton value="Se connecter" action="#{utilisateurBean.seConnecter()}"
+                                         styleClass="w-full py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">Pas encore de compte ? 
+                                <h:commandLink action="#{navigationController.creerCompte()}" styleClass="text-emerald-600 hover:underline font-medium">Créer un compte</h:commandLink>
+                            </p>
+                        </div>
+                    </div>
+                </h:form>
+            </h:panelGroup>
+
+            <!-- Add/Edit Form (Only if logged in) -->
+            <h:form rendered="#{utilisateurBean.loggedIn}" class="space-y-6">
                 <div class="bg-sand p-6 rounded-xl border border-accent/20">
                     <h3 class="text-xl font-serif font-bold text-gray-800 mb-6 flex items-center gap-2">
                         <i class="fas fa-map-marker-alt text-accent"></i>
@@ -122,8 +164,8 @@
             </h:form>
         </div>
 
-        <!-- List Section -->
-        <div class="relative z-10 max-w-7xl w-full">
+        <!-- List Section (Only if logged in) -->
+        <h:panelGroup rendered="#{utilisateurBean.loggedIn}" layout="block" styleClass="relative z-10 max-w-7xl w-full">
             <h2 class="text-3xl font-serif font-bold text-primary text-center mb-8 drop-shadow-sm">Destinations Enregistrées</h2>
             
             <h:form>
@@ -210,7 +252,7 @@
                 <i class="fas fa-compass text-4xl text-gray-400 mb-4"></i>
                 <p class="text-gray-500 font-medium">Aucune destination enregistrée pour le moment.</p>
             </h:panelGroup>
-        </div>
+        </h:panelGroup>
     </main>
 
     <!-- Footer -->

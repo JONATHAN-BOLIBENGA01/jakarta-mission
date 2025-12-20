@@ -30,10 +30,10 @@ public class Utilisateur implements Serializable {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
     
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(nullable = false, length = 255)
     private String password;
     
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(nullable = true, length = 255)
     private String description;
 
     public Utilisateur() {

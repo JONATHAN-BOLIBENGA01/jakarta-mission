@@ -25,6 +25,17 @@
         <servlet-name>FacesServlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <!-- Configuration du filtre SessionControlFilter -->
+    <filter>
+             <filter-name>SessionControlFilter</filter-name>
+             <filter-class>com.jakarta.jakartamission.business.SessionControlFilter</filter-class>
+     </filter>
+        <!-- Mapping des URL vers le filtre SessionControlFilter  -->
+       <filter-mapping>
+           <filter-name>SessionControlFilter</filter-name>
+           <url-pattern>/pages/*</url-pattern>
+       </filter-mapping>
 
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>

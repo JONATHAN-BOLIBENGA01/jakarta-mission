@@ -66,4 +66,29 @@ public class UtilisateurEntrepriseBean {
             return false;
         }
     }
+
+    public boolean authentifier(String email, String password) {
+        Utilisateur utilisateur = trouverUtilisateurParEmail(email);
+        if (utilisateur != null && verifierMotDePasse(password, utilisateur.getPassword())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public void mettreAJourProfil(Utilisateur utilisateur) {
+        em.merge(utilisateur);
+    }
+
+    @Transactional
+    public boolean changerMotDePasse(Long userId, String ancienMotDePasse, String nouveauMotDePasse) {
+        Utilisateur utilisateur = em.find(Utilisateur.class, userId);
+        if (utilisateur != null && verifierMotDePasse(ancienMotDePasse, utilisateur.getPassword())) {
+            String hashedPassword = BCrypt.hashpw(nouveauMotDePasse, BCrypt.gensalt());
+            utilisateur.setPassword(hashedPassword);
+            em.merge(utilisateur);
+            return true;
+        }
+        return false;
+    }
 }

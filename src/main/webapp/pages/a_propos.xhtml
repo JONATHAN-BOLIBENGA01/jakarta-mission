@@ -3,15 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html">
 <h:head>
-    <title>À Propos - Jakarta mission</title>
+    <title>Mon Profil - Jakarta Mission</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Custom CSS for Fonts -->
     <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
@@ -21,9 +21,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0f5132', 
-                        secondary: '#0dcaf0', 
-                        accent: '#d4af37', 
+                        primary: '#0f5132',
+                        secondary: '#0dcaf0',
+                        accent: '#d4af37',
                         sand: '#fdfbf7',
                     },
                     fontFamily: {
@@ -35,24 +35,43 @@
         }
     </script>
 </h:head>
-<h:body class="bg-sand text-gray-800 flex flex-col min-h-screen">
+<h:body class="bg-gray-900 text-gray-800 min-h-screen">
+
+    <!-- Background with gradient overlay -->
+    <div class="fixed inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&amp;fit=crop&amp;w=1920&amp;q=80"
+             alt="Bali Temple"
+             class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/80 via-gray-900/70 to-gray-900/90"></div>
+    </div>
+
+    <!-- Floating particles effect -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl"></div>
+    </div>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+    <nav class="fixed w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#{request.contextPath}/index.xhtml" class="flex items-center gap-2 text-2xl font-serif font-bold text-primary">
-                        <i class="fas fa-leaf text-emerald-600"></i>
-                        <span>Jakarta mission</span>
+                    <a href="#{request.contextPath}/index.xhtml" class="flex items-center gap-2 text-2xl font-serif font-bold text-white">
+                        <i class="fas fa-leaf text-emerald-400"></i>
+                        <span>Jakarta Mission</span>
                     </a>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#{request.contextPath}/index.xhtml" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Accueil</a>
-                        <a href="#{request.contextPath}/index.xhtml#destinations" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Destinations</a>
-                        <a href="#{request.contextPath}/index.xhtml#culture" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Culture</a>
-                        <a href="#{request.contextPath}/index.xhtml#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#{request.contextPath}/index.xhtml" class="text-white/70 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-white/10">Accueil</a>
+                        <a href="#{request.contextPath}/index.xhtml#destinations" class="text-white/70 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-white/10">Destinations</a>
+                        <a href="#{request.contextPath}/index.xhtml#culture" class="text-white/70 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-white/10">Culture</a>
+                        <h:form rendered="#{utilisateurBean.loggedIn}" styleClass="inline">
+                            <span class="text-emerald-400 font-medium text-sm px-3 py-2">
+                                <i class="fas fa-user-circle mr-1"></i>#{utilisateurBean.currentUser.username}
+                            </span>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -60,43 +79,173 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center pt-20 pb-10 px-4">
-        <div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row-reverse">
-            <!-- Image Side -->
-            <div class="md:w-1/2 relative min-h-[300px]">
-                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=1920&amp;q=80" 
-                     alt="Culture Indonésienne" 
-                     class="absolute inset-0 w-full h-full object-cover"/>
-                <div class="absolute inset-0 bg-accent/20 mix-blend-multiply"></div>
+    <main class="relative z-10 min-h-screen flex items-center justify-center pt-24 pb-10 px-4">
+        <div class="max-w-4xl w-full">
+            <!-- Header Section -->
+            <div class="text-center mb-10">
+                <h1 class="text-5xl font-serif font-bold text-white mb-4 tracking-tight">
+                    Mon <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Profil</span>
+                </h1>
+                <p class="text-white/60 text-lg">Bienvenue dans votre espace personnel</p>
             </div>
-            
-            <!-- Content Side -->
-            <div class="md:w-1/2 p-10 flex flex-col justify-center">
-                <h1 class="text-3xl font-serif font-bold text-primary mb-6">À Propos</h1>
-                <p class="text-gray-600 mb-6 leading-relaxed">
-                    Bienvenue dans votre espace de découverte. Ici, vous pouvez explorer différentes destinations et vous préparer à vivre une expérience unique en Indonésie.
+
+            <h:messages globalOnly="true" layout="table"
+                        styleClass="mb-6 w-full max-w-md mx-auto p-4 text-sm rounded-2xl backdrop-blur-xl"
+                        infoClass="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                        errorClass="bg-red-500/20 text-red-300 border border-red-500/30"
+                        warnClass="bg-amber-500/20 text-amber-300 border border-amber-500/30"/>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Profile Card -->
+                <div class="lg:col-span-2 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
+                    <!-- Card Header with Avatar -->
+                    <div class="relative h-32 bg-gradient-to-r from-emerald-600 to-teal-500">
+                        <div class="absolute -bottom-12 left-8">
+                            <div class="w-24 h-24 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-xl border-4 border-gray-900/50 rotate-3 hover:rotate-0 transition-transform duration-300">
+                                <i class="fas fa-user text-4xl text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                                <i class="fas fa-check-circle mr-1 text-emerald-300"></i>Compte actif
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="pt-16 pb-8 px-8">
+                        <h:form id="profileForm">
+                            <!-- User Info Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <!-- Username (editable) -->
+                                <div class="group">
+                                    <label class="flex items-center gap-2 text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">
+                                        <i class="fas fa-user text-emerald-400"></i>
+                                        Nom d'utilisateur
+                                    </label>
+                                    <div class="relative">
+                                        <h:inputText value="#{utilisateurBean.username}"
+                                                     styleClass="w-full bg-white/5 border border-white/20 rounded-xl py-3 px-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 focus:bg-white/10 transition-all duration-300"
+                                                     placeholder="#{utilisateurBean.currentUser.username}"/>
+                                        <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                                            <i class="fas fa-pen text-emerald-400/50 text-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email (read-only) -->
+                                <div class="group">
+                                    <label class="flex items-center gap-2 text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">
+                                        <i class="fas fa-envelope text-emerald-400"></i>
+                                        Adresse email
+                                    </label>
+                                    <div class="relative">
+                                        <h:inputText value="#{utilisateurBean.currentUser.email}"
+                                                     readonly="true"
+                                                     styleClass="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white/50 cursor-not-allowed"/>
+                                        <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                                            <i class="fas fa-lock text-white/20 text-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-8">
+                                <label class="flex items-center gap-2 text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">
+                                    <i class="fas fa-feather text-emerald-400"></i>
+                                    À propos de vous
+                                </label>
+                                <h:inputTextarea value="#{utilisateurBean.description}"
+                                                 rows="4"
+                                                 styleClass="w-full bg-white/5 border border-white/20 rounded-xl py-4 px-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 focus:bg-white/10 transition-all duration-300 resize-none"
+                                                 placeholder="#{utilisateurBean.currentUser.description != null ? utilisateurBean.currentUser.description : 'Partagez quelques mots sur vous et vos passions de voyage...'}"/>
+                            </div>
+
+                            <!-- Update Button -->
+                            <h:commandButton value="Enregistrer les modifications"
+                                             action="#{utilisateurBean.mettreAJourProfil()}"
+                                             styleClass="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border-none"/>
+                        </h:form>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="space-y-6">
+                    <!-- Quick Stats Card -->
+                    <div class="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-6 shadow-2xl">
+                        <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-chart-line text-emerald-400"></i>
+                            Votre activité
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-map-marker-alt text-emerald-400"></i>
+                                    </div>
+                                    <span class="text-white/70 text-sm">Destinations</span>
+                                </div>
+                                <span class="text-white font-bold">Explorer</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                    <span class="text-white/70 text-sm">Statut</span>
+                                </div>
+                                <span class="text-emerald-400 font-bold">Actif</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions Card -->
+                    <div class="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-6 shadow-2xl">
+                        <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-compass text-accent"></i>
+                            Actions rapides
+                        </h3>
+                        <div class="space-y-3">
+                            <h:form>
+                                <h:commandButton value="Explorer les destinations"
+                                                 action="#{navigationController.voirLieu()}"
+                                                 styleClass="w-full bg-gradient-to-r from-accent to-amber-500 hover:from-amber-400 hover:to-accent text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-accent/30 transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border-none text-sm"/>
+                            </h:form>
+
+                            <a href="#{request.contextPath}/index.xhtml"
+                               class="flex items-center justify-center gap-2 w-full bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm">
+                                <i class="fas fa-home"></i>
+                                Retour à l'accueil
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Logout Card -->
+                    <div class="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-2xl rounded-3xl border border-red-500/20 p-6 shadow-2xl">
+                        <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-sign-out-alt text-red-400"></i>
+                            Déconnexion
+                        </h3>
+                        <p class="text-white/50 text-sm mb-4">Vous souhaitez quitter votre session ?</p>
+                        <h:form>
+                            <h:commandButton value="Se déconnecter"
+                                             action="#{utilisateurBean.deconnecter()}"
+                                             styleClass="w-full bg-red-500/80 hover:bg-red-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-red-500/30 transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border-none text-sm"
+                                             onclick="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Quote -->
+            <div class="text-center mt-12">
+                <p class="text-white/30 text-sm italic">
+                    "Le voyage est la seule chose qu'on achète qui nous rend plus riche."
                 </p>
-                <p class="text-gray-600 mb-8 leading-relaxed">
-                    Notre mission est de vous faire découvrir les trésors cachés de l'archipel, de ses plages paradisiaques à ses temples millénaires.
-                </p>
-                
-                <h:form>
-                    <h:commandButton 
-                        value="Choisir votre destination"
-                        action="#{navigationController.voirLieu()}"
-                        styleClass="w-full py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" />
-                </h:form>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-500 text-sm">2025 Merveilleuse Indonésie. Tous droits réservés.</p>
-        </div>
-    </footer>
-
 </h:body>
 </html>
-

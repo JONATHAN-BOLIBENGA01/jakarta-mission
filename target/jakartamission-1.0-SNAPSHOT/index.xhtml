@@ -37,6 +37,11 @@
     </script>
 </h:head>
 <h:body class="bg-sand text-gray-800">
+    <h:messages globalOnly="true" layout="table" 
+                styleClass="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md p-4 text-sm rounded-lg shadow-xl"
+                infoClass="bg-green-100 text-green-700 border border-green-400"
+                errorClass="bg-red-100 text-red-700 border border-red-400"
+                warnClass="bg-yellow-100 text-yellow-700 border border-yellow-400"/>
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
@@ -77,32 +82,81 @@
             <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         </div>
 
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 border border-white/30">
-                Bienvenue au Paradis
-            </span>
-            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
-                Explorez l'archipel <br/> Indonesie
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-100 mb-10 max-w-2xl mx-auto font-light drop-shadow-md">
-                Découvrez la beauté à couper le souffle, la culture riche et l'hospitalité chaleureuse de l'archipel indonésien.
-            </p>
-            <h:form>
-                <div class="inline-block gap-4">
-                    <h:commandButton value="Commencez votre voyage ici" action="home" 
-                                 styleClass="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-none text-lg"/>
-                
-                <h:commandButton 
-                        value="creer votre compte ici"
-                        action="#{navigationController.creerCompte()}"
-                        styleClass="mr-5 bg-green-500 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-none text-lg"/>
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+                <!-- Left Content: Text -->
+                <div class="w-full lg:w-1/2 text-center lg:text-left">
+                    <span class="inline-block py-1 px-3 rounded-full bg-emerald-500/20 backdrop-blur-sm text-emerald-400 text-sm font-semibold mb-6 border border-emerald-500/30 uppercase tracking-widest">
+                        Bienvenue au Paradis
+                    </span>
+                    <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+                        Explorez l'archipel <br/> <span class="text-emerald-400">Indonésie</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl font-light drop-shadow-lg leading-relaxed">
+                        Découvrez la beauté à couper le souffle, la culture riche et l'hospitalité chaleureuse de l'archipel indonésien.
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <div class="flex items-center gap-2 text-white/70">
+                            <i class="fas fa-check-circle text-emerald-500"></i>
+                            <span>Destinations de rêve</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white/70">
+                            <i class="fas fa-check-circle text-emerald-500"></i>
+                            <span>Culture millénaire</span>
+                        </div>
+                    </div>
                 </div>
-            </h:form>
-            
-            
-            
+
+                <!-- Right Content: Form -->
+                <div class="w-full lg:w-[450px]">
+                    <h:form styleClass="bg-gray-900/40 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] transform transition-all duration-500 hover:shadow-emerald-500/10">
+                        <div class="mb-8 text-center">
+                            <h2 class="text-2xl font-serif font-bold text-white mb-2">Accédez à votre aventure</h2>
+                            <div class="w-12 h-1 bg-emerald-500 mx-auto rounded-full"></div>
+                        </div>
+                        
+                        <div class="space-y-5">
+                            <div class="text-left relative">
+                                <label class="block text-white/60 text-xs font-semibold uppercase tracking-wider mb-2 ml-1">Email</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-emerald-400">
+                                        <i class="fas fa-envelope text-white/30"></i>
+                                    </div>
+                                    <h:inputText value="#{welcomBean.email}" 
+                                               styleClass="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-11 pr-4 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white/10 transition-all duration-300"
+                                               placeholder="votre@email.com"/>
+                                </div>
+                            </div>
+                            
+                            <div class="text-left relative">
+                                <label class="block text-white/60 text-xs font-semibold uppercase tracking-wider mb-2 ml-1">Mot de passe</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-emerald-400">
+                                        <i class="fas fa-lock text-white/30"></i>
+                                    </div>
+                                    <h:inputSecret value="#{welcomBean.password}" 
+                                                 styleClass="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-11 pr-4 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white/10 transition-all duration-300"
+                                                 placeholder="••••••••"/>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col gap-5 pt-4">
+                                <h:commandButton value="Se connecter" action="#{welcomBean.sAuthentifier()}" 
+                                             styleClass="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-4 px-8 rounded-2xl shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_15px_30px_rgba(16,185,129,0.4)] transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-none text-lg"/>
+                                
+                                <div class="flex items-center justify-center gap-2 text-sm">
+                                    <span class="text-white/40">Pas encore de compte ?</span>
+                                    <h:commandLink value="Créer ici" 
+                                                 action="#{navigationController.creerCompte()}"
+                                                 styleClass="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors underline decoration-emerald-400/30 underline-offset-4"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
         </div>
-        
+
         <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white">
             <i class="fas fa-chevron-down text-2xl"></i>

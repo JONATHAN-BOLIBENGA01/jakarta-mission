@@ -1,10 +1,12 @@
 com/jakartaudbl/jakartamission/business/LieuEntrepriseBean.class
-com/jakartaudbl/jakartamission/beans/LieuBean.class
+com/jakartaudbl/jakartamission/business/SessionManager.class
 com/jakartaudbl/jakartamission/resources/JakartaEE10Resource.class
 com/jakartaudbl/jakartamission/entities/Utilisateur.class
 com/jakartaudbl/jakartamission/JakartaRestConfiguration.class
 com/jakartaudbl/jakartamission/beans/WelcomBean.class
 com/jakartaudbl/jakartamission/business/UtilisateurEntrepriseBean.class
-com/jakartaudbl/jakartamission/beans/UtilisateurBean.class
 com/jakartaudbl/jakartamission/entities/Lieu.class
+com/jakartaudbl/jakartamission/business/SessionControlFilter.class
+com/jakartaudbl/jakartamission/beans/LieuBean.class
+com/jakartaudbl/jakartamission/beans/UtilisateurBean.class
 com/jakartaudbl/jakartamission/beans/NavigationBean.class

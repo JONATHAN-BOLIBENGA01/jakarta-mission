@@ -1,82 +1,65 @@
 package com.jakartaudbl.jakartamission.beans;
 
+import com.jakartaudbl.jakartamission.business.UtilisateurEntrepriseBean;
+
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import com.jakartaudbl.jakartamission.entities.Utilisateur;
+import com.jakartaudbl.jakartamission.business.SessionManager;
 
 @RequestScoped
 @Named
 public class WelcomBean {
 
-    private String nom;
+    private String email;
+    private String password;
     private String message;
 
-    private String messageUsd;
-    private String messageIdr;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    @Inject
+    private SessionManager sessionManager;
 
-    private double amountUsd;
-    private double amountIdr;
-
+    @Inject
+    private UtilisateurEntrepriseBean utilisateurEntrepriseBean;
     
-    private static final double RATE = 16682.0;
-
-    
-    public String getNom() {
-        return nom;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getPassword() {
+        return password;
+    }
+    
+    
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getMessage() {
         return message;
     }
 
-   
-    public void display() {
-        this.message = "Welcome to Indonesia, dear " + this.nom;
+    public void setMessage(String message) {
+        this.message = message;
     }
-
-    public double getAmountUsd() {
-        return amountUsd;
-    }
-
-    public void setAmountUsd(double amountUsd) {
-        this.amountUsd = amountUsd;
-    }
-
-    public double getAmountIdr() {
-        return amountIdr;
-    }
-
-    public void setAmountIdr(double amountIdr) {
-        this.amountIdr = amountIdr;
-    }
-
-    public String getMessageUsd() {
-        return messageUsd;
-    }
-
-    public String getMessageIdr() {
-        return messageIdr;
-    }
-
-   
-    public double convertToUsd() {
-        return amountIdr / RATE;
-    }
-
     
-    public double convertToIdr() {
-        return amountUsd * RATE;
-    }
-
     
-    public void processConversion() {
-        double usd = convertToUsd();
-        double cdf = convertToIdr();
+    public String sAuthentifier() {
+        Utilisateur utilisateur = utilisateurEntrepriseBean.trouverUtilisateurParEmail(email);
 
-        this.messageUsd = amountIdr + " CDF = " + usd + " USD";
-        this.messageIdr = amountUsd + " USD = " + cdf + " CDF";
+        if(utilisateur != null && utilisateurEntrepriseBean.verifierMotDePasse(password, utilisateur.getPassword())) {
+            sessionManager.createSession("user", email);
+            return "home?faces-redirect=true";
+        }else{
+            this.message = "Email ou mot de passe incorrect";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email ou mot de passe incorrect", null));
+            return null;
+        }
     }
 }
