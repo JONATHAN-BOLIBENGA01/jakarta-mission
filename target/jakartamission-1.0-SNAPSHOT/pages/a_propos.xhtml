@@ -162,11 +162,86 @@
                                                  placeholder="#{utilisateurBean.currentUser.description != null ? utilisateurBean.currentUser.description : 'Partagez quelques mots sur vous et vos passions de voyage...'}"/>
                             </div>
 
-                            <!-- Update Button -->
+                            <!-- Update Profile Button -->
                             <h:commandButton value="Enregistrer les modifications"
                                              action="#{utilisateurBean.mettreAJourProfil()}"
                                              styleClass="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border-none"/>
                         </h:form>
+
+                        <!-- Divider -->
+                        <div class="my-8 border-t border-white/10"></div>
+
+                        <!-- Password Change Section -->
+                        <div class="mb-6">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-amber-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-serif font-bold text-white">Sécurité du compte</h3>
+                                    <p class="text-white/50 text-sm">Modifiez votre mot de passe</p>
+                                </div>
+                            </div>
+
+                            <h:form id="passwordForm">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                    <!-- Ancien mot de passe -->
+                                    <div class="group">
+                                        <label class="flex items-center gap-2 text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">
+                                            <i class="fas fa-key text-amber-400"></i>
+                                            Ancien mot de passe
+                                        </label>
+                                        <div class="relative">
+                                            <h:inputSecret value="#{utilisateurBean.ancienMotDePasse}"
+                                                          styleClass="w-full bg-white/5 border border-white/20 rounded-xl py-3 px-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 focus:bg-white/10 transition-all duration-300"
+                                                          placeholder="••••••••"/>
+                                            <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                                                <i class="fas fa-lock text-amber-400/50 text-sm"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nouveau mot de passe -->
+                                    <div class="group">
+                                        <label class="flex items-center gap-2 text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">
+                                            <i class="fas fa-key text-amber-400"></i>
+                                            Nouveau mot de passe
+                                        </label>
+                                        <div class="relative">
+                                            <h:inputSecret value="#{utilisateurBean.nouveauMotDePasse}"
+                                                          styleClass="w-full bg-white/5 border border-white/20 rounded-xl py-3 px-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 focus:bg-white/10 transition-all duration-300"
+                                                          placeholder="••••••••"/>
+                                            <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                                                <i class="fas fa-lock text-amber-400/50 text-sm"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Confirmer nouveau mot de passe -->
+                                    <div class="group">
+                                        <label class="flex items-center gap-2 text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">
+                                            <i class="fas fa-check-circle text-amber-400"></i>
+                                            Confirmer le mot de passe
+                                        </label>
+                                        <div class="relative">
+                                            <h:inputSecret value="#{utilisateurBean.confirmerNouveauMotDePasse}"
+                                                          styleClass="w-full bg-white/5 border border-white/20 rounded-xl py-3 px-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 focus:bg-white/10 transition-all duration-300"
+                                                          placeholder="••••••••"/>
+                                            <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                                                <i class="fas fa-lock text-amber-400/50 text-sm"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Change Password Button -->
+                                <h:commandButton value="Changer le mot de passe"
+                                                 action="#{utilisateurBean.changerMotDePasse()}"
+                                                 styleClass="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border-none">
+                                    <i class="fas fa-shield-alt mr-2"></i>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
 
