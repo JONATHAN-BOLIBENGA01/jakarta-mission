@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+<h:head>
+    <title>Mes Visites - Jakarta mission</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f5132', 
+                        secondary: '#0dcaf0', 
+                        accent: '#d4af37', 
+                        sand: '#fdfbf7',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</h:head>
+<h:body class="bg-sand text-gray-800 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#{request.contextPath}/index.xhtml" class="flex items-center gap-2 text-2xl font-serif font-bold text-primary">
+                        <i class="fas fa-leaf text-emerald-600"></i>
+                        <span>Jakarta Mission</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#{request.contextPath}/home.xhtml" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Mon Espace</a>
+                        <a href="#{request.contextPath}/pages/lieux.xhtml" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Destinations</a>
+                        <h:form rendered="#{utilisateurBean.loggedIn}" styleClass="inline">
+                            <h:commandLink action="#{utilisateurBean.seDeconnecter()}" styleClass="text-red-600 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                <i class="fas fa-sign-out-alt mr-1"></i>Déconnexion
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-28 pb-12 px-4 max-w-7xl mx-auto w-full">
+        <!-- Messages -->
+        <h:messages globalOnly="true" layout="table" 
+                    styleClass="mb-8 w-full p-4 text-sm rounded-lg shadow-sm"
+                    infoClass="bg-green-100 text-green-700 border border-green-400"
+                    errorClass="bg-red-100 text-red-700 border border-red-400"/>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Visit Form -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden p-8 sticky top-28">
+                    <h2 class="text-2xl font-serif font-bold text-primary mb-6 flex items-center gap-3">
+                        <i class="fas fa-camera-retro text-accent"></i>
+                        #{visiteBean.formVisible ? 'Enregistrer une visite' : 'Sélectionner un lieu'}
+                    </h2>
+
+                    <h:panelGroup rendered="#{!visiteBean.formVisible}">
+                        <div class="text-center py-8">
+                            <i class="fas fa-map-marked-alt text-4xl text-gray-300 mb-4 block"></i>
+                            <p class="text-gray-500 mb-6">Veuillez d'abord choisir un lieu depuis la page des destinations pour enregistrer une nouvelle visite.</p>
+                            <h:link outcome="lieux" styleClass="inline-block py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg hover:bg-emerald-700 transition-all">
+                                Voir les destinations
+                            </h:link>
+                        </div>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{visiteBean.formVisible}">
+                        <h:form class="space-y-4">
+                            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 mb-4">
+                                <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest block mb-1">Destination</span>
+                                <p class="text-primary font-bold">#{visiteBean.newVisite.lieu.nom}</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Temps passé (heures)</label>
+                                <h:inputText value="#{visiteBean.newVisite.tempsPasse}" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none"/>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Dépenses (USD)</label>
+                                <h:inputText value="#{visiteBean.newVisite.depense}" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none"/>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Observations</label>
+                                <h:inputTextarea value="#{visiteBean.newVisite.observation}" rows="4" styleClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none resize-none"/>
+                            </div>
+
+                            <div class="flex gap-3 pt-4">
+                                <h:commandButton value="Enregistrer" action="#{visiteBean.enregistrerVisite()}"
+                                               styleClass="flex-1 py-3 px-6 rounded-xl bg-emerald-600 text-white font-semibold shadow hover:bg-emerald-700 transition-all cursor-pointer"/>
+                                <h:commandButton value="Annuler" action="#{visiteBean.annulerVisite()}"
+                                               styleClass="py-3 px-6 rounded-xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 transition-all cursor-pointer"/>
+                            </div>
+                        </h:form>
+                    </h:panelGroup>
+                </div>
+            </div>
+
+            <!-- Right Column: Recent Visits -->
+            <div class="lg:col-span-2">
+                <div class="bg-white/50 backdrop-blur-md rounded-3xl p-8 border border-white shadow-sm">
+                    <h2 class="text-2xl font-serif font-bold text-primary mb-8">Mes Souvenirs de Voyage</h2>
+
+                    <h:panelGroup rendered="#{empty visiteBean.recentVisites}">
+                        <div class="text-center py-16 bg-white/30 rounded-2xl border-2 border-dashed border-gray-200">
+                            <i class="fas fa-passport text-4xl text-gray-300 mb-4 block"></i>
+                            <p class="text-gray-500">Vous n'avez pas encore enregistré de visites.</p>
+                        </div>
+                    </h:panelGroup>
+
+                    <div class="space-y-6">
+                        <ui:repeat value="#{visiteBean.recentVisites}" var="v">
+                            <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-gray-100 flex flex-col md:flex-row gap-6">
+                                <div class="md:w-1/4">
+                                    <div class="aspect-square bg-sand rounded-xl flex flex-col items-center justify-center text-primary border border-emerald-100">
+                                        <span class="text-3xl font-bold">
+                                            <f:convertDateTime pattern="dd" value="#{v.dateVisite}" />
+                                        </span>
+                                        <span class="text-xs font-bold uppercase">
+                                            <f:convertDateTime pattern="MMM yyyy" value="#{v.dateVisite}" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="md:w-3/4 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2 font-serif">#{v.lieu.nom}</h3>
+                                        <p class="text-gray-600 text-sm italic mb-4">"#{v.observation}"</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-4 pt-4 border-t border-gray-50">
+                                        <div class="flex items-center gap-2 text-xs font-semibold text-gray-500">
+                                            <i class="fas fa-clock text-emerald-500"></i>
+                                            #{v.tempsPasse} Heures
+                                        </div>
+                                        <div class="flex items-center gap-2 text-xs font-semibold text-gray-500">
+                                            <i class="fas fa-wallet text-amber-500"></i>
+                                            #{v.depense} USD
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">2025 Jakarta mission. Tous droits réservés.</p>
+        </div>
+    </footer>
+</h:body>
+</html>

@@ -8,5 +8,8 @@ com/jakartaudbl/jakartamission/business/UtilisateurEntrepriseBean.class
 com/jakartaudbl/jakartamission/entities/Lieu.class
 com/jakartaudbl/jakartamission/business/SessionControlFilter.class
 com/jakartaudbl/jakartamission/beans/LieuBean.class
+com/jakartaudbl/jakartamission/entities/Visite.class
+com/jakartaudbl/jakartamission/beans/VisiteBean.class
 com/jakartaudbl/jakartamission/beans/UtilisateurBean.class
+com/jakartaudbl/jakartamission/business/VisiteEntrepriseBean.class
 com/jakartaudbl/jakartamission/beans/NavigationBean.class

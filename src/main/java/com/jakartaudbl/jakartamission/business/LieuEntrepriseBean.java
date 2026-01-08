@@ -45,7 +45,7 @@ public class LieuEntrepriseBean {
     }
 
     // Trouver un lieu par ID
-    public Lieu trouverLieuParId(Lieu lieu) {
+    public Lieu trouverLieuParId(Integer lieu) {
         return em.find(Lieu.class, lieu);
     }
 }

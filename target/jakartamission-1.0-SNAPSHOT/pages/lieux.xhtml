@@ -196,6 +196,12 @@
                                                action="#{lieuBean.preparerModification(lieu)}"
                                                styleClass="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 text-white text-xs font-semibold shadow hover:bg-amber-600 transition-colors cursor-pointer"/>
                                                
+                                <h:outputLink value="#{request.contextPath}/pages/visite.xhtml" 
+                                              styleClass="flex-1 py-1.5 px-3 rounded-lg bg-emerald-600 text-white text-xs font-semibold shadow hover:bg-emerald-700 transition-colors text-center">
+                                    <f:param name="lieuId" value="#{lieu.id}" />
+                                    Visiter
+                                </h:outputLink>
+
                                 <h:commandButton value="Supprimer" 
                                                action="#{lieuBean.preparerSuppression(lieu.id)}"
                                                styleClass="flex-1 py-1.5 px-3 rounded-lg bg-red-500 text-white text-xs font-semibold shadow hover:bg-red-600 transition-colors cursor-pointer"/>

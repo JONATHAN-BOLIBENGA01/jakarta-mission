@@ -38,6 +38,17 @@ public class NavigationBean {
        }
    } 
    
+     public void voirVisit(){
+       try{
+           String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+           FacesContext.getCurrentInstance().getExternalContext()
+                   .redirect(contextPath + "/pages/visite.xhtml");
+       }catch(IOException e){
+           
+           e.printStackTrace();
+       }
+   }
+   
    public void creerCompte(){
        try{
            String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();

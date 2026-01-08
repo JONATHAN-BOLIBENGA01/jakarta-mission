@@ -170,7 +170,7 @@ public class UtilisateurBean implements Serializable {
         currentUser = null;
         loginEmail = null;
         loginPassword = null;
-        return null;
+        return "/index?faces-redirect=true";
     }
 
     public boolean isLoggedIn() {

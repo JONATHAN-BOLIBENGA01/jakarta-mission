@@ -11,11 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 import com.jakartaudbl.jakartamission.entities.Lieu;
 import com.jakartaudbl.jakartamission.business.LieuEntrepriseBean;
+import jakarta.faces.event.AjaxBehaviorEvent;
+import jakarta.ws.rs.client.Client;
+
 
 /**
  *
  * @author jojo
  */
+import jakarta.faces.event.AjaxBehaviorEvent;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.MediaType;
 @Named(value = "lieuBean")
 @ViewScoped
 public class LieuBean implements Serializable {
@@ -23,6 +29,8 @@ public class LieuBean implements Serializable {
     private String description;
     private double longitude;
     private double latitude;
+    private String weatherMessage;
+    private Integer selectedLieu;
     private int id; // ID for editing
     private int idASupprimer; // ID for deletion
     private boolean showModal = false;
@@ -99,5 +107,33 @@ public class LieuBean implements Serializable {
         this.description = "";
         this.latitude = 0.0;
         this.longitude = 0.0;
+    }
+    public void fetchWeatherMessage(Lieu l) {
+      
+        if (selectedLieu != null) {
+            // Appel au service web pour obtenir les données météorologiques
+        
+            String serviceURL = "http://localhost:8080/j-weather/webapi/JakartaWeather?latitude="
+                    + l.getLatitude() + "&longitude=" + l.getLongitude();
+            Client client = ClientBuilder.newClient();
+            String response = client.target(serviceURL)
+                    .request(MediaType.TEXT_PLAIN)
+                    .get(String.class);
+            // Enregistrement du message météo dans la variable weatherMessage
+          this.weatherMessage =response;
+        }
+       
+    }
+    
+    public void updateWeatherMessage(AjaxBehaviorEvent event) {
+        
+        Lieu lieu=lieuEntrepriseBean.trouverLieuParId(selectedLieu);
+        this.fetchWeatherMessage(lieu);
+    } 
+ public String getWeatherMessage() {
+        return weatherMessage;
+    }
+    public void setWeatherMessage(String weatherMessage) {
+        this.weatherMessage = weatherMessage;
     }
 }
